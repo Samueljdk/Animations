@@ -30,11 +30,13 @@ void bouncingBall() {
      bool stopBouncing = false;
      bool reachedBottom = false;
      bool reachedRight = false;
-     int counter = 1;
+     bool reachedTop = false;
+     int counter = 0.01;
      while (!stopBouncing && window.isOpen()) {
+
          //diagonal move to the bottom
          if (horizontalPosition < 250 && verticalPosition<500 && !reachedBottom) {
-             horizontalPosition+=1;
+             horizontalPosition+=0.01;
              verticalPosition = horizontalPosition *2;
 
          }
@@ -45,14 +47,29 @@ void bouncingBall() {
          }
          // diagonal move to the right
          if (reachedBottom && horizontalPosition<500 && verticalPosition>250) {
-             horizontalPosition += 1;
-             verticalPosition -= 1;
-  //           reachedRight = true;
+             horizontalPosition += 0.01;
+             verticalPosition -= 0.01;
+    if(horizontalPosition>=500 && verticalPosition<=250)reachedRight = true;
          }
-         else {
-            reachedRight = true;
+
+         // moving diagonally to the left
+         if (reachedBottom && reachedRight && verticalPosition>0) {
+             horizontalPosition -= 0.01;
+             verticalPosition -= 0.01;
+             if (verticalPosition <= 0)reachedTop = true;
          }
-         
+        
+        // moving down to left
+         if (reachedBottom && reachedRight && reachedTop && horizontalPosition>0) {
+             horizontalPosition -= 0.01;
+             verticalPosition += 0.01;
+            
+         }
+         if (horizontalPosition <= 0 && verticalPosition<=0) {
+             reachedBottom = false;
+             reachedRight = false;
+             reachedTop = false;
+         }
         
          
         
@@ -62,7 +79,11 @@ void bouncingBall() {
          Text text;
          text.setFont(font);
          text.setCharacterSize(24);
-         text.setString("W:"+ to_string(horizontalPosition) +" H: " + to_string(verticalPosition));
+         String message = "W:" + to_string(horizontalPosition) + " H: " + to_string(verticalPosition);
+         if (reachedBottom)message += "\n Reached Bottom";
+         if (reachedRight)message += "\n Reached Right";
+
+         text.setString(message);
 
          Event event;
          while (window.pollEvent(event)) { // keeps checking to see if the user closed the windo
@@ -88,12 +109,12 @@ int main() {
     int choice = 0;
     while (!stopMenu) {
         cout << "Welcome to the animations program \n";
-        cout << "Enter 1 to see the bouncing ball animation \n";
+        cout << "Enter 0.01 to see the bouncing ball animation \n";
         cout << "Enter any other value to exit \n";
         cin >> choice;
         switch (choice)
         {
-        case 1:
+        case 0.01:
             bouncingBall();
             system("cls"); // clears the screen so that the menu can be displayed on the same spot
 
