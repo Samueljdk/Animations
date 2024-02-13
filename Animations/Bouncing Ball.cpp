@@ -29,10 +29,12 @@ void bouncingBall() {
      
      bool stopBouncing = false;
      bool reachedBottom = false;
+     bool reachedRight = false;
      int counter = 1;
      while (!stopBouncing && window.isOpen()) {
-         if (horizontalPosition < 250 && verticalPosition<500) {
-             horizontalPosition+=0.01;
+         //diagonal move to the bottom
+         if (horizontalPosition < 250 && verticalPosition<500 && !reachedBottom) {
+             horizontalPosition+=1;
              verticalPosition = horizontalPosition *2;
 
          }
@@ -41,13 +43,16 @@ void bouncingBall() {
              reachedBottom = true;
              
          }
-
-
-         if (reachedBottom && horizontalPosition<500) {
-             horizontalPosition += 0.01;
-             verticalPosition -= 0.01;
-             
+         // diagonal move to the right
+         if (reachedBottom && horizontalPosition<500 && verticalPosition>250) {
+             horizontalPosition += 1;
+             verticalPosition -= 1;
+  //           reachedRight = true;
          }
+         else {
+            reachedRight = true;
+         }
+         
         
          
         
