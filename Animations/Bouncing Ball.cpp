@@ -5,24 +5,43 @@ using namespace sf;
 using namespace std;
 
 void bouncingBall() {
- 
-     int screenWidth = 600;
-     int screenHeight = 600;
-     RenderWindow window(VideoMode(screenWidth,screenHeight), "Bouncing Ball Animation");
+    /*VideoMode desktopMode = VideoMode::getDesktopMode();
+    int screenWidth = desktopMode.width;
+    int screenHeight = desktopMode.height;*/
+    
+    int screenWidth = 600;
+    int screenHeight = 600;
+    RenderWindow window(VideoMode(screenWidth, screenHeight), "Bouncing Ball Animation");
+    window.setPosition(Vector2i(0, 0)); // sets the position of the window at top left corner
+   
+    /*
+     float horizontalPosition = static_cast<float>(screenWidth-100);
+     float verticalPosition = static_cast<float>(screenHeight - 100);*/
      float horizontalPosition = 0;
-     float verticalPosition =0;
+     float verticalPosition = 0;
      float hChange = 0;
      float vChange = 0;
+     float slope = 1;
      // drawing the circle
 
      CircleShape circle(50); // radius of 50
      
      bool stopBouncing = false;
      while (!stopBouncing && window.isOpen()) {
-         hChange += 0.01;
-         vChange += 0.01;
-         circle.setPosition(horizontalPosition+hChange, (horizontalPosition*(-1)+vChange)); // position on the window
+         if (verticalPosition >= 500) {
+             vChange -= 0.001;
 
+         }
+         else if (verticalPosition<=100){
+             vChange += 0.001;
+
+         }
+       //  hChange += 0.001;
+         
+         horizontalPosition = horizontalPosition + hChange;
+         verticalPosition =verticalPosition * slope + vChange;
+        circle.setPosition(horizontalPosition,verticalPosition); // position on the window
+        // circle.setPosition(horizontalPosition, verticalPosition);
          
          
          Event event;
