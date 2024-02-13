@@ -9,41 +9,56 @@ void bouncingBall() {
     int screenWidth = desktopMode.width;
     int screenHeight = desktopMode.height;*/
     
+    sf::Font font;
+    if (!font.loadFromFile("Aller_It.ttf")) {
+        cout << "error loading file";
+    }
+    
     int screenWidth = 600;
     int screenHeight = 600;
     RenderWindow window(VideoMode(screenWidth, screenHeight), "Bouncing Ball Animation");
     window.setPosition(Vector2i(0, 0)); // sets the position of the window at top left corner
    
-    /*
-     float horizontalPosition = static_cast<float>(screenWidth-100);
-     float verticalPosition = static_cast<float>(screenHeight - 100);*/
      float horizontalPosition = 0;
      float verticalPosition = 0;
      float hChange = 0;
      float vChange = 0;
-     float slope = 1;
-     // drawing the circle
+
 
      CircleShape circle(50); // radius of 50
      
      bool stopBouncing = false;
+     bool reachedBottom = false;
+     int counter = 1;
      while (!stopBouncing && window.isOpen()) {
-         if (verticalPosition >= 500) {
-             vChange -= 0.001;
+         if (horizontalPosition < 250 && verticalPosition<500) {
+             horizontalPosition+=0.01;
+             verticalPosition = horizontalPosition *2;
 
          }
-         else if (verticalPosition<=100){
-             vChange += 0.001;
-
+         
+         else {
+             reachedBottom = true;
+             
          }
-       //  hChange += 0.001;
+
+
+         if (reachedBottom && horizontalPosition<500) {
+             horizontalPosition += 0.01;
+             verticalPosition -= 0.01;
+             
+         }
+        
          
-         horizontalPosition = horizontalPosition + hChange;
-         verticalPosition =verticalPosition * slope + vChange;
-        circle.setPosition(horizontalPosition,verticalPosition); // position on the window
-        // circle.setPosition(horizontalPosition, verticalPosition);
+        
          
-         
+
+         circle.setPosition(horizontalPosition, verticalPosition);
+         Text text;
+         text.setFont(font);
+         text.setCharacterSize(24);
+         text.setString("W:"+ to_string(horizontalPosition) +" H: " + to_string(verticalPosition));
+
          Event event;
          while (window.pollEvent(event)) { // keeps checking to see if the user closed the windo
              if (event.type == Event::Closed) {
@@ -55,6 +70,7 @@ void bouncingBall() {
          
        
         window.clear(); // clears the window to prepare to make the next ball drawing
+        window.draw(text);
         window.draw(circle); // draws the ball
         window.display(); // displays the ball
     }

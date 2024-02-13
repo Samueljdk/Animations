@@ -22,4 +22,8 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Font Include="Caramel.ttf" />
+    <Font Include="Aller_It.ttf" />
+  </ItemGroup>
 </Project>
