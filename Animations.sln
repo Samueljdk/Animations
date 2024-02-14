@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Bouncing Ball", "Animations
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Square Spiral", "Square Spiral\Square Spiral.vcxproj", "{C1D1D637-79F5-4EE3-9AAE-BAD600BB651E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Grid", "Grid\Grid.vcxproj", "{CA99A543-1916-4AB6-895A-63CB26CC02C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{C1D1D637-79F5-4EE3-9AAE-BAD600BB651E}.Release|x64.Build.0 = Release|x64
 		{C1D1D637-79F5-4EE3-9AAE-BAD600BB651E}.Release|x86.ActiveCfg = Release|Win32
 		{C1D1D637-79F5-4EE3-9AAE-BAD600BB651E}.Release|x86.Build.0 = Release|Win32
+		{CA99A543-1916-4AB6-895A-63CB26CC02C1}.Debug|x64.ActiveCfg = Debug|x64
+		{CA99A543-1916-4AB6-895A-63CB26CC02C1}.Debug|x64.Build.0 = Debug|x64
+		{CA99A543-1916-4AB6-895A-63CB26CC02C1}.Debug|x86.ActiveCfg = Debug|Win32
+		{CA99A543-1916-4AB6-895A-63CB26CC02C1}.Debug|x86.Build.0 = Debug|Win32
+		{CA99A543-1916-4AB6-895A-63CB26CC02C1}.Release|x64.ActiveCfg = Release|x64
+		{CA99A543-1916-4AB6-895A-63CB26CC02C1}.Release|x64.Build.0 = Release|x64
+		{CA99A543-1916-4AB6-895A-63CB26CC02C1}.Release|x86.ActiveCfg = Release|Win32
+		{CA99A543-1916-4AB6-895A-63CB26CC02C1}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
