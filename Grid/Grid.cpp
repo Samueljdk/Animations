@@ -6,6 +6,12 @@ using namespace sf;
 using namespace std;
 
 void grid() {
+    sf::Font font;
+    if (!font.loadFromFile("Aller_It.ttf")) {
+        cout << "error loading file";
+    }
+
+
     float screenWidth = 600;
     float screenHeight = 600;
     float xCircle = 75;
@@ -83,8 +89,15 @@ void grid() {
             }
         }
 
-        window.draw(circle);
+        Text text;
+        text.setFont(font);
+        text.setFillColor(Color::Black);
+        text.setCharacterSize(24);
+        String message = "X: " + to_string(circle.getPosition().x)+ " Y: " + to_string(circle.getPosition().y);
+        text.setString(message);
 
+        window.draw(circle);
+        window.draw(text);
         window.display();
     }
 }
