@@ -8,18 +8,27 @@ using namespace std;
 void grid() {
     float screenWidth = 600;
     float screenHeight = 600;
+    float xCircle = 75;
+    float yCirlce = 255;
+
     RenderWindow window(VideoMode(screenWidth, screenHeight), "Grid Animation");
     window.setPosition(Vector2i(0, 0));
+
+    CircleShape circle(15);
+    circle.setFillColor(Color::Green);
+    circle.setPosition(xCircle, yCirlce);
+    float xChange = 60;
 
     const int rows = 10;
     const int columns = 10;
     float xPosition = 0;
     float yPosition = 0;
+
     RectangleShape squares[rows][columns];
 
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < columns; j++) {
-            if (i == 0 || i==9 || j==9) {
+            if (i == 0 || i==9 || j==9 || j == 0) {
                 squares[i][j].setFillColor(Color::White);
 
             } 
@@ -46,23 +55,19 @@ void grid() {
         yPosition += 60;
     }
 
-    CircleShape circle(15);
-    float xCircle=15;
-    float yCirlce =255;
-        
-    circle.setFillColor(Color::Green);
-    circle.setPosition(xCircle, yCirlce);
-
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < columns; j++) {
-
-        }
-    }
-
-    bool keepMoving = true;
-    
-
+    float speed = 0.1;
     while (window.isOpen()) {
+        if (Keyboard::isKeyPressed(Keyboard::Left) && circle.getPosition().x > 75)
+            circle.move(-speed, 0);
+        if (Keyboard::isKeyPressed(Keyboard::Right) && circle.getPosition().x < 495)
+           circle.move(speed, 0);
+    
+            if (Keyboard::isKeyPressed(Keyboard::Up) && circle.getPosition().y > 75)
+            circle.move(0, -speed);
+        if (Keyboard::isKeyPressed(Keyboard::Down) && circle.getPosition().y <495)
+            circle.move(0, speed);
+
+
         Event event;
         while (window.pollEvent(event)) {
             if (event.type == Event::Closed) {
