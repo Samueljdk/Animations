@@ -5,13 +5,13 @@ using namespace sf;
 using namespace std;
 
 void squareSpiral() {
-	float screenWidth = 800;
-	float screenHeight = 800;
+	float screenWidth = 600;
+	float screenHeight = 600;
 	RenderWindow window(VideoMode(screenWidth, screenHeight), "Square Spiral Animation");
 	window.setPosition(Vector2i(0, 0)); //
 	float xPosition = screenWidth / 2;
 	float yPosition = screenHeight / 2;
-	const int numOfSquares = 10;
+	const int numOfSquares = 13;
 	float sidelength = 100;
 	RectangleShape squares[numOfSquares];
 
