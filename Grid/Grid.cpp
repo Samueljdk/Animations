@@ -19,9 +19,25 @@ void grid() {
 
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < columns; j++) {
-            squares[i][j].setFillColor(Color::Transparent);
+            if (i == 0 || i==9 || j==9) {
+                squares[i][j].setFillColor(Color::White);
+
+            } 
+            else if (i==1 || i==4 || i==8) {
+                squares[i][j].setFillColor(Color::Transparent);
+
+            }
+            else if (j == 1 || j == 4 || j == 8) {
+                squares[i][j].setFillColor(Color::Transparent);
+
+            }
+
+            
+            else {
+                squares[i][j].setFillColor(Color::White);
+            }
             squares[i][j].setSize(Vector2f(60, 60));
-            squares[i][j].setOutlineColor(Color::White);
+            squares[i][j].setOutlineColor(Color::Red);
             squares[i][j].setOutlineThickness(4);
             squares[i][j].setPosition(Vector2f(xPosition, yPosition));
             xPosition += 60;
@@ -29,6 +45,22 @@ void grid() {
         xPosition = 0; // Reset xPosition for the next row
         yPosition += 60;
     }
+
+    CircleShape circle(15);
+    float xCircle=15;
+    float yCirlce =255;
+        
+    circle.setFillColor(Color::Green);
+    circle.setPosition(xCircle, yCirlce);
+
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < columns; j++) {
+
+        }
+    }
+
+    bool keepMoving = true;
+    
 
     while (window.isOpen()) {
         Event event;
@@ -45,6 +77,8 @@ void grid() {
                 window.draw(squares[i][j]);
             }
         }
+
+        window.draw(circle);
 
         window.display();
     }
