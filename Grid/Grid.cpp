@@ -86,77 +86,78 @@ using namespace std;
 
 }
 */
-String decide(float x, float y) {
+/*Vector2f decide(float x, float y) {
+    float speed = 0.1;
+   
     x = round(x); // approximate to the nearest whole number value
     y = round(y); // approximate to the nearest whole number value
     random_device rd;
     mt19937 gen(rd());
     
     //255, 75 down only 1
-    if (x == 255 && y == 75)return "down";
-    //495, 75 down only 1
-    if (x == 495 && y == 75)return "down";
+    if (y == 75 && (x == 255 || x == 495))return Vector2f(0, speed);
     //75,75  right or down  2
     if (x == 75 && y == 75) {
-        random_device rd;
-        mt19937 gen(rd());
+       
         uniform_int_distribution<> distrib(0, 1);
         int randomChoice = distrib(gen);
-        if (randomChoice == 0)return "right";
-        else return "down";
+        if (randomChoice == 0)return Vector2f(speed, 0);
+        else return Vector2f(0, speed);
     }
     //75, 495 up or right 2
     if (x == 75 && y == 495) {
         
         uniform_int_distribution<> distrib(0, 1);
         int randomChoice = distrib(gen);
-        if (randomChoice == 0)return "up";
-        else return "right";
+        if (randomChoice == 0)return Vector2f(0, -speed);
+        else return Vector2f(speed, 0);
     }
     //495, 495 up or left   2
     if (x == 495 && y == 495) {
         uniform_int_distribution<> distrib(0, 1);
         int randomChoice = distrib(gen);
-        if (randomChoice == 0)return "up";
-        else return "left";
+        if (randomChoice == 0)return Vector2f(0, -speed);
+        else return Vector2f(-speed, 0);
     }
     //75, 255 up, down, right  3
     if (x == 75 && y == 255) {
         uniform_int_distribution<> distrib(0, 2);
         int randomChoice = distrib(gen);
-        if (randomChoice == 0)return "up";
-        else if (randomChoice == 1) return "down";
-        else return "right";
+        if (randomChoice == 0)return Vector2f(0, -speed);
+        else if (randomChoice == 1) return Vector2f(0, speed);
+        else return Vector2f(speed, 0);
     }
     //495, 255 left, up or down 3
     if (x == 495 && y == 255) {
         uniform_int_distribution<> distrib(0, 2);
         int randomChoice = distrib(gen);
-        if (randomChoice == 0)return "up";
-        else if (randomChoice == 1) return "down";
-        else return "left";
+        if (randomChoice == 0)return Vector2f(0, -speed);
+        else if (randomChoice == 1) return Vector2f(0, speed);
+        else return Vector2f(-speed, 0);
     }
    // 255, 495 up, left, right 3
     if (x == 255 && y == 495) {
         uniform_int_distribution<> distrib(0, 2);
         int randomChoice = distrib(gen);
-        if (randomChoice == 0)return "up";
-        else if (randomChoice == 1) return "right";
-        else return "left";
+        if (randomChoice == 0)return Vector2f(0, -speed);
+        else if (randomChoice == 1) return Vector2f(speed, 0);
+        else return Vector2f(-speed, 0);
     }
 //255, 255 all directions 4
     if (x == 255 && y == 495) {
+        cout << "reached middle";
         uniform_int_distribution<> distrib(0, 3);
         int randomChoice = distrib(gen);
-        if (randomChoice == 0)return "up";
-        else if (randomChoice == 1) return "right";
-        else if (randomChoice == 2) return "down";
-        else return "left";
+        if (randomChoice == 0)return Vector2f(0, -speed);
+        else if (randomChoice == 1) return Vector2f(speed, 0);
+        else if (randomChoice == 2) return Vector2f(0, speed);
+        else return Vector2f(-speed, 0);
     }
   
+    return Vector2f(speed, 0);
+   // return "not intersection";
+}*/
 
-    return "not intersection";
-}
 void grid() {
     sf::Font font;
     if (!font.loadFromFile("Aller_It.ttf")) {
@@ -213,41 +214,91 @@ void grid() {
         yPosition += 60;
     }
 
-    float speed = 0.1;
+    float speed = 0.4;
+    string decision = "";
+
+    bool moveRight = false;
+    bool moveUp=false;
+    bool moveLeft = false;
+    bool moveDown = false;
     while (window.isOpen()) {
-        if (Keyboard::isKeyPressed(Keyboard::Left) &&circle.getPosition().x > 75) {
-            circle.move(-speed, 0);
-            string x = decide(circle.getPosition().x, circle.getPosition().y);
-            if (x != "not intersection")cout << x;
-
-        }
-        if (Keyboard::isKeyPressed(Keyboard::Right) && circle.getPosition().x < 495)
-        {
-            circle.move(speed, 0);
-            string x = decide(circle.getPosition().x, circle.getPosition().y);
-            if (x != "not intersection")cout << x;
-
-        }
-        if (Keyboard::isKeyPressed(Keyboard::Up) && circle.getPosition().y > 75)
-        {
-            circle.move(0, -speed);
-            string x = decide(circle.getPosition().x, circle.getPosition().y);
-            if(x!="not intersection")cout << x;
-
-        }
-        if (Keyboard::isKeyPressed(Keyboard::Down) && circle.getPosition().y < 495)
-        {
-            circle.move(0, speed);
-            string x = decide(circle.getPosition().x, circle.getPosition().y);
-            if (x != "not intersection")cout << x;
-
-        }
-
         Event event;
         while (window.pollEvent(event)) {
-            if (event.type == Event::Closed) {
-                window.close();
+
+            if (event.type == sf::Event::KeyPressed) {
+                if (event.key.code == Keyboard::Right && !moveRight && circle.getPosition().x<495) {
+                    xPosition = circle.getPosition().x + 60;
+                    yPosition = circle.getPosition().y;
+                    circle.setPosition(Vector2f(xPosition, yPosition));
+                    moveRight = true;
+                }
             }
+            if (event.type == sf::Event::KeyReleased) {
+                if (event.key.code == sf::Keyboard::Right) {
+                    // Reset the flag when the key is released
+                    moveRight = false;
+                }
+            }
+
+            if (event.type == sf::Event::KeyPressed) {
+                if (event.key.code == Keyboard::Left && !moveLeft && circle.getPosition().x > 75) {
+                    xPosition = circle.getPosition().x - 60;
+                    yPosition = circle.getPosition().y;
+                    circle.setPosition(Vector2f(xPosition, yPosition));
+                    moveLeft = true;
+                }
+            }
+            if (event.type == sf::Event::KeyReleased) {
+                if (event.key.code == sf::Keyboard::Left) {
+                    // Reset the flag when the key is released
+                    moveLeft = false;
+                }
+            }
+
+            if (event.type == sf::Event::KeyPressed) {
+                if (event.key.code == Keyboard::Up && !moveUp && circle.getPosition().y > 75) {
+                    xPosition = circle.getPosition().x;
+                    yPosition = circle.getPosition().y - 60;  //reduce the vertical position to move up
+                    circle.setPosition(Vector2f(xPosition, yPosition));
+                    moveUp = true;
+                }
+            }
+            if (event.type == sf::Event::KeyReleased) {
+                if (event.key.code == sf::Keyboard::Up) {
+                    // Reset the flag when the key is released
+                    moveUp = false;
+                }
+            }
+
+            if (event.type == sf::Event::KeyPressed) {
+                if (event.key.code == Keyboard::Down && !moveDown && circle.getPosition().y < 495) {
+                    xPosition = circle.getPosition().x;
+                    yPosition = circle.getPosition().y + 60; // increase the vertical position to move down
+                    circle.setPosition(Vector2f(xPosition, yPosition));
+                    moveDown = true;
+                }
+            }
+            if (event.type == sf::Event::KeyReleased) {
+                if (event.key.code == sf::Keyboard::Down) {
+                    // Reset the flag when the key is released
+                    moveDown = false;
+                }
+            }
+
+
+
+
+        
+       
+        
+      
+        if (event.type == Event::Closed) {
+            window.close();
+        }
+
+
+        
+       
         }
 
         window.clear();
