@@ -4,7 +4,7 @@
 #include <random>
 using namespace sf;
 using namespace std;
-
+/*
 std::string getRandomDirection(std::mt19937& gen, std::uniform_int_distribution<>& distrib, int exclude) {
     int randomChoice;
     do {
@@ -48,18 +48,56 @@ std::string decide(float x, float y) {
     else if (x == 255 && y == 495) return getRandomDirection(gen, distrib, 3);
     else return "right";
 }
+*/
+int randomChoice() {
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dis(0, 1);
+    cout << "ranomdizing choice here" << endl;
+    return dis(gen);
+}
+string decide(float x, float y) {
+    // only make a decision at the intersections
 
+    if ((60 < x && x < 120) && (120 < y < 480)) {
+        if (randomChoice() == 0)return "up";
+        else return "down";
+    }
+    if ((240 < x && x < 300) && (120 < y < 480)) {
+        if (randomChoice() == 0)return "up";
+        else return "down";
+    }
+    if ((480 < x && x < 540) && (120 < y < 480)) {
+        if (randomChoice() == 0)return "up";
+        else return "down";
+    }
+    if ((120 < x && x < 480) && (60 < y < 120)) {
+        if (randomChoice() == 0)return "right";
+        else return "left";
+    }
+    if ((120 < x && x < 480) && (240 < y < 300)) {
+        if (randomChoice() == 0)return "right";
+        else return "left";
+    }
+    if ((120 < x && x < 480) && (480 < y < 540)) {
+        if (randomChoice() == 0)return "right";
+        else return "left";
+    }
+    
+
+
+
+}
 void grid() {
+    
+    float screenWidth = 600;
+    float screenHeight = 600;
+    float xCircle = 195;
+    float yCirlce = 255;
     sf::Font font;
     if (!font.loadFromFile("Aller_It.ttf")) {
         cout << "error loading file";
     }
-
-
-    float screenWidth = 600;
-    float screenHeight = 600;
-    float xCircle = 75;
-    float yCirlce = 255;
 
     RenderWindow window(VideoMode(screenWidth, screenHeight), "Grid Animation");
     window.setPosition(Vector2i(0, 0));
@@ -116,16 +154,20 @@ void grid() {
         Event event;
         while (window.pollEvent(event)) {
             decision = "up";
-            //decision = "down";
+           // decision = "down";
            // decision = "right";
            // decision = "left";
-          //  decision = decide(circle.getPosition().x, circle.getPosition().y);
+          
+
+
+            decision = decide(circle.getPosition().x, circle.getPosition().y);
             cout << decision << endl;
             if(decision == "right" && !movedRight && circle.getPosition().x<495) {
                     xPosition = circle.getPosition().x + 60;
                     yPosition = circle.getPosition().y;
                     circle.setPosition(Vector2f(xPosition, yPosition));
                     movedRight = true;
+
                 }
             else{
                
@@ -138,6 +180,7 @@ void grid() {
                     yPosition = circle.getPosition().y;
                     circle.setPosition(Vector2f(xPosition, yPosition));
                     movedLeft = true;
+
                 }
            else {
                     // Reset the flag when the key is released
@@ -150,6 +193,7 @@ void grid() {
                     yPosition = circle.getPosition().y - 60;  //reduce the vertical position to move up
                     circle.setPosition(Vector2f(xPosition, yPosition));
                     movedUp = true;
+
                 }
             else  {
                     // Reset the flag when the key is released
@@ -162,6 +206,7 @@ void grid() {
                     yPosition = circle.getPosition().y + 60; // increase the vertical position to move down
                     circle.setPosition(Vector2f(xPosition, yPosition));
                     movedDown = true;
+
                 }
             
             else {
