@@ -1,10 +1,162 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <cstdlib>
-
+#include <random>
 using namespace sf;
 using namespace std;
+/*String decide(float x, float y) {
+    x = round(x); // approximate to the nearest whole number value
+    y = round(y); // approximate to the nearest whole number value
 
+    
+    //255, 75 down only 1
+    if (x == 255 && y == 75)return "down";
+    //495, 75 down only 1
+    if (x == 495 && y == 75)return "down";
+    //75,75  right or down  2
+    if (x == 75 && y == 75) {
+        random_device rd;
+        mt19937 gen(rd());
+        uniform_int_distribution<> distrib(0, 1);
+        int randomChoice = distrib(gen);
+        if (randomChoice == 0)return "right";
+        else return "down";
+    }
+    //75, 495 up or right 2
+    if (x == 75 && y == 495) {
+        random_device rd;
+        mt19937 gen(rd());
+        uniform_int_distribution<> distrib(0, 1);
+        int randomChoice = distrib(gen);
+        if (randomChoice == 0)return "up";
+        else return "right";
+    }
+    //495, 495 up or left   2
+    if (x == 495 && y == 495) {
+        random_device rd;
+        mt19937 gen(rd());
+        uniform_int_distribution<> distrib(0, 1);
+        int randomChoice = distrib(gen);
+        if (randomChoice == 0)return "up";
+        else return "left";
+    }
+    //75, 255 up, down, right  3
+    if (x == 75 && y == 255) {
+        random_device rd;
+        mt19937 gen(rd());
+        uniform_int_distribution<> distrib(0, 2);
+        int randomChoice = distrib(gen);
+        if (randomChoice == 0)return "up";
+        else if (randomChoice == 1) return "down";
+        else return "right";
+    }
+    //495, 255 left, up or down 3
+    if (x == 495 && y == 255) {
+        random_device rd;
+        mt19937 gen(rd());
+        uniform_int_distribution<> distrib(0, 2);
+        int randomChoice = distrib(gen);
+        if (randomChoice == 0)return "up";
+        else if (randomChoice == 1) return "down";
+        else return "left";
+    }
+   // 255, 495 up, left, right 3
+    if (x == 255 && y == 495) {
+        random_device rd;
+        mt19937 gen(rd());
+        uniform_int_distribution<> distrib(0, 2);
+        int randomChoice = distrib(gen);
+        if (randomChoice == 0)return "up";
+        else if (randomChoice == 1) return "right";
+        else return "left";
+    }
+//255, 255 all directions 4
+    if (x == 255 && y == 495) {
+        random_device rd;
+        mt19937 gen(rd());
+        uniform_int_distribution<> distrib(0, 3);
+        int randomChoice = distrib(gen);
+        if (randomChoice == 0)return "up";
+        else if (randomChoice == 1) return "right";
+        else if (randomChoice == 2) return "down";
+        else return "left";
+    }
+  
+
+
+}
+*/
+String decide(float x, float y) {
+    x = round(x); // approximate to the nearest whole number value
+    y = round(y); // approximate to the nearest whole number value
+    random_device rd;
+    mt19937 gen(rd());
+    
+    //255, 75 down only 1
+    if (x == 255 && y == 75)return "down";
+    //495, 75 down only 1
+    if (x == 495 && y == 75)return "down";
+    //75,75  right or down  2
+    if (x == 75 && y == 75) {
+        random_device rd;
+        mt19937 gen(rd());
+        uniform_int_distribution<> distrib(0, 1);
+        int randomChoice = distrib(gen);
+        if (randomChoice == 0)return "right";
+        else return "down";
+    }
+    //75, 495 up or right 2
+    if (x == 75 && y == 495) {
+        
+        uniform_int_distribution<> distrib(0, 1);
+        int randomChoice = distrib(gen);
+        if (randomChoice == 0)return "up";
+        else return "right";
+    }
+    //495, 495 up or left   2
+    if (x == 495 && y == 495) {
+        uniform_int_distribution<> distrib(0, 1);
+        int randomChoice = distrib(gen);
+        if (randomChoice == 0)return "up";
+        else return "left";
+    }
+    //75, 255 up, down, right  3
+    if (x == 75 && y == 255) {
+        uniform_int_distribution<> distrib(0, 2);
+        int randomChoice = distrib(gen);
+        if (randomChoice == 0)return "up";
+        else if (randomChoice == 1) return "down";
+        else return "right";
+    }
+    //495, 255 left, up or down 3
+    if (x == 495 && y == 255) {
+        uniform_int_distribution<> distrib(0, 2);
+        int randomChoice = distrib(gen);
+        if (randomChoice == 0)return "up";
+        else if (randomChoice == 1) return "down";
+        else return "left";
+    }
+   // 255, 495 up, left, right 3
+    if (x == 255 && y == 495) {
+        uniform_int_distribution<> distrib(0, 2);
+        int randomChoice = distrib(gen);
+        if (randomChoice == 0)return "up";
+        else if (randomChoice == 1) return "right";
+        else return "left";
+    }
+//255, 255 all directions 4
+    if (x == 255 && y == 495) {
+        uniform_int_distribution<> distrib(0, 3);
+        int randomChoice = distrib(gen);
+        if (randomChoice == 0)return "up";
+        else if (randomChoice == 1) return "right";
+        else if (randomChoice == 2) return "down";
+        else return "left";
+    }
+  
+
+    return "not intersection";
+}
 void grid() {
     sf::Font font;
     if (!font.loadFromFile("Aller_It.ttf")) {
@@ -63,16 +215,33 @@ void grid() {
 
     float speed = 0.1;
     while (window.isOpen()) {
-        if (Keyboard::isKeyPressed(Keyboard::Left) && circle.getPosition().x > 75)
+        if (Keyboard::isKeyPressed(Keyboard::Left) &&circle.getPosition().x > 75) {
             circle.move(-speed, 0);
-        if (Keyboard::isKeyPressed(Keyboard::Right) && circle.getPosition().x < 495)
-           circle.move(speed, 0);
-    
-            if (Keyboard::isKeyPressed(Keyboard::Up) && circle.getPosition().y > 75)
-            circle.move(0, -speed);
-        if (Keyboard::isKeyPressed(Keyboard::Down) && circle.getPosition().y <495)
-            circle.move(0, speed);
+            string x = decide(circle.getPosition().x, circle.getPosition().y);
+            if (x != "not intersection")cout << x;
 
+        }
+        if (Keyboard::isKeyPressed(Keyboard::Right) && circle.getPosition().x < 495)
+        {
+            circle.move(speed, 0);
+            string x = decide(circle.getPosition().x, circle.getPosition().y);
+            if (x != "not intersection")cout << x;
+
+        }
+        if (Keyboard::isKeyPressed(Keyboard::Up) && circle.getPosition().y > 75)
+        {
+            circle.move(0, -speed);
+            string x = decide(circle.getPosition().x, circle.getPosition().y);
+            if(x!="not intersection")cout << x;
+
+        }
+        if (Keyboard::isKeyPressed(Keyboard::Down) && circle.getPosition().y < 495)
+        {
+            circle.move(0, speed);
+            string x = decide(circle.getPosition().x, circle.getPosition().y);
+            if (x != "not intersection")cout << x;
+
+        }
 
         Event event;
         while (window.pollEvent(event)) {
