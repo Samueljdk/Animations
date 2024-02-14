@@ -49,50 +49,73 @@ std::string decide(float x, float y) {
     else return "right";
 }
 */
-int randomChoice() {
+int randomChoice(int lowerBound, int upperBound) {
     random_device rd;
     mt19937 gen(rd());
-    uniform_int_distribution<> dis(0, 1);
+    uniform_int_distribution<> dis(lowerBound, upperBound);
     cout << "ranomdizing choice here" << endl;
     return dis(gen);
 }
 string decide(float x, float y) {
     // only make a decision at the intersections
-
-    if ((60 < x && x < 120) && (120 < y < 480)) {
-        if (randomChoice() == 0)return "up";
+    int choice = 0;
+    if ((60 < x && x < 120) && (60 < y < 120)) {
+        choice = randomChoice(0, 1);
+        if ( choice== 0)return "right";
         else return "down";
     }
-    if ((240 < x && x < 300) && (120 < y < 480)) {
-        if (randomChoice() == 0)return "up";
+    if ((60 < x && x < 120) && (240 < y < 300)) {
+         choice = randomChoice(0, 2);
+        if (choice == 0)return "up";
+        else if(choice==1) return "right";
         else return "down";
     }
-    if ((480 < x && x < 540) && (120 < y < 480)) {
-        if (randomChoice() == 0)return "up";
+    if ((60 < x && x < 120) && (480 < y < 540)) {
+        choice = randomChoice(0, 1);
+        if (choice == 0)return "up";
+        else return "right";
+    }
+    if ((240 < x && x < 300) && (60 < y < 120)) {
+        choice = randomChoice(0, 1);
+        if (choice == 0)return "right";
         else return "down";
     }
-    if ((120 < x && x < 480) && (60 < y < 120)) {
-        if (randomChoice() == 0)return "right";
+    if ((240 < x && x < 300) && (240 < y < 300)) {
+        choice == randomChoice(0, 3);
+        if (choice == 0)return "up";
+        else if (choice == 1)return "right";
+        else if (choice == 2)return "down";
         else return "left";
     }
-    if ((120 < x && x < 480) && (240 < y < 300)) {
-        if (randomChoice() == 0)return "right";
+    if ((240 < x && x <300 ) && (480 < y < 540)) {
+        choice = randomChoice(0, 2);
+        if (choice == 0)return "up";
+        else if (choice == 1) return "right";
         else return "left";
     }
-    if ((120 < x && x < 480) && (480 < y < 540)) {
-        if (randomChoice() == 0)return "right";
+    if ((480 < x && x < 540) && (60 < y < 120)) {
+        choice = randomChoice(0, 1);
+        if (choice == 0)return "left";
+        else return "down";
+    }
+    if ((480 < x && x < 540) && (240 < y < 300)) {
+        choice = randomChoice(0, 2);
+        if (choice == 0)return "up";
+        else if (choice == 1) return "left";
+        else return "down";
+    }
+    if ((480 < x && x < 540) && (480 < y < 540)) {
+        choice = randomChoice(0, 1);
+        if (choice == 0)return "up";
         else return "left";
     }
-    
-
-
 
 }
 void grid() {
     
     float screenWidth = 600;
     float screenHeight = 600;
-    float xCircle = 195;
+    float xCircle = 75;
     float yCirlce = 255;
     sf::Font font;
     if (!font.loadFromFile("Aller_It.ttf")) {
@@ -153,9 +176,9 @@ void grid() {
     while (window.isOpen()) {
         Event event;
         while (window.pollEvent(event)) {
-            decision = "up";
+           // decision = "up";
            // decision = "down";
-           // decision = "right";
+            decision = "right";
            // decision = "left";
           
 
