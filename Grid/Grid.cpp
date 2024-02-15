@@ -62,34 +62,38 @@ string decide(float x, float y) {
     string randomDecision = "up";
     // intersections
     int choice = 0;
-    if ((60 < x && x < 120) && (60 < y < 120)) {
+    if ((60 < x && x < 120) && (60 < y && y < 120)) {
 
         randomDecision = "right";
         cout << "Random chose " << randomDecision;
         cout << "here at number 1" << endl;
         return randomDecision;
-    } else
-    if ((60 < x && x < 120) && (240 < y < 300)) {
+    } 
+    else
+    if ((60 < x && x < 120) && (240 < y && y < 300)) {
 
         randomDecision = "up";
         cout << "Random chose " << randomDecision;
         cout << "here at number 2" << endl;
         return randomDecision;
-    }else 
-    if ((60 < x && x < 120) && (480 < y < 540)) {
+    }
+    else
+    if ((60 < x && x < 120) && (480 < y && y < 540)) {
         randomDecision = "up";
         cout << "Random chose " << randomDecision;
         cout << "here at number 3" << endl;
         return randomDecision;
-    }else
-    if ((240 < x && x < 300) && (60 < y < 120)) {
+    }
+    else
+    if ((240 < x && x < 300) && (60 < y && y < 120)) {
 
         randomDecision = "right";
         cout << "Random chose " << randomDecision;
         cout << "here at number 4" << endl;
         return randomDecision;
-    }else
-    if ((240 < x && x < 300) && (240 < y < 300)) {
+    }
+    else
+    if ((240 < x && x < 300) && (240 < y && y < 300)) {
         choice == randomChoice(0, 3);
         if (choice == 0)randomDecision = "up";
         else if (choice == 1)randomDecision = "right";
@@ -98,32 +102,77 @@ string decide(float x, float y) {
         cout << "Random chose " << randomDecision;
         cout << "here at number 5" << endl;
         return randomDecision;
-    }else 
-    if ((240 < x && x < 300) && (480 < y < 540)) {
+    } 
+    else
+    if ((240 < x && x < 300) && (480 < y && y < 540)) {
         choice = randomChoice(0, 1);
         if (choice == 0)randomDecision = "up";
-
         else randomDecision = "left";
+
         cout << "Random chose " << randomDecision;
         cout << "here at number 6" << endl;
         return randomDecision;
-    }else 
-    if ((480 < x && x < 540) && (60 < y < 120)) {
+    }
+    else
+    if ((480 < x && x < 540) && (60 < y && y < 120)) {
 
         randomDecision = "down";
         cout << "Random chose " << randomDecision;
         cout << "here at number 7" << endl;
         return randomDecision;
-    }else
-
-    if ((480 < x && x < 540) && (480 < y < 540)) {
+    }
+    else 
+    if ((480 < x && x < 540) && (480 < y && y < 540)) {
 
         randomDecision = "left";
         cout << "Random chose " << randomDecision;
         cout << "here at number 9" << endl;
         return randomDecision;
     }
+    else
+    
+    // horizontal tubes
+    if (120 < x && x < 480 && 60 < y && y < 120) {
+        cout << "first horizontal tube" << endl;
+        randomDecision = "right";
+        return randomDecision;
+    }
+    else
+    if (120 < x && x < 480 && 240 < y && y < 300) {
+        cout << "second horizontal tube" << endl;
+        randomDecision = "right";
+        return randomDecision;
+    }
+    else 
+    if (120 < x && x < 480 && 480 < y && y < 540) {
+        cout << "third horizontal tube" << endl;
+        randomDecision = "left";
+        return randomDecision;
+    }
+    else 
+    
+    //vertical tubes
+    if (60 < x && x < 120 && 120 < y && y < 480) {
+        cout << "first vertical tube" << endl;
+        randomDecision = "up";
+        return randomDecision;
+    }else 
+   /* if (240 < x && x < 300 && 120 < y && y < 480) {
+        cout << "second vertical tube" << endl;
 
+        randomDecision = "down";
+        return randomDecision;
+    }
+   */
+    
+    if (480 < x && x < 540 && 120 < y && y < 480) {
+        cout << "third vertical tube" << endl;
+
+        randomDecision = "down";
+        return randomDecision;
+    }
+    
+    
     return randomDecision;
 
 }
@@ -209,7 +258,7 @@ void grid() {
                 xPosition = circle.getPosition().x + 60;
                 yPosition = circle.getPosition().y;
                 circle.setPosition(Vector2f(xPosition, yPosition));
-              //  decision = decide(circle.getPosition().x, circle.getPosition().y);
+               // decision = decide(circle.getPosition().x, circle.getPosition().y);
 
     
 
@@ -221,7 +270,7 @@ void grid() {
                 xPosition = circle.getPosition().x - 60;
                 yPosition = circle.getPosition().y;
                 circle.setPosition(Vector2f(xPosition, yPosition));
-                //decision = decide(circle.getPosition().x, circle.getPosition().y);
+               // decision = decide(circle.getPosition().x, circle.getPosition().y);
 
             }
         
@@ -232,7 +281,7 @@ void grid() {
                 xPosition = circle.getPosition().x;
                 yPosition = circle.getPosition().y - 60;  //reduce the vertical position to move up
                 circle.setPosition(Vector2f(xPosition, yPosition));
-               // decision = decide(circle.getPosition().x, circle.getPosition().y);
+              //  decision = decide(circle.getPosition().x, circle.getPosition().y);
 
             }
         
@@ -243,7 +292,7 @@ void grid() {
                 xPosition = circle.getPosition().x;
                 yPosition = circle.getPosition().y + 60; // increase the vertical position to move down
                 circle.setPosition(Vector2f(xPosition, yPosition));
-               // decision = decide(circle.getPosition().x, circle.getPosition().y);
+              //  decision = decide(circle.getPosition().x, circle.getPosition().y);
 
 
             }
