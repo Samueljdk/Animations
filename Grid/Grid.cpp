@@ -58,8 +58,8 @@ int randomChoice(int lowerBound, int upperBound) {
 
     return randomNumber;
 }
-string decide(float x, float y) {
-    string randomDecision = "up";
+string decide(float x, float y, string previousDecision) {
+    string randomDecision = previousDecision; 
     // intersections
     int choice = 0;
     if ((60 < x && x < 120) && (60 < y && y < 120)) {
@@ -129,8 +129,8 @@ string decide(float x, float y) {
         cout << "here at number 9" << endl;
         return randomDecision;
     }
+  /*
     else
-    
     // horizontal tubes
     if (120 < x && x < 480 && 60 < y && y < 120) {
         cout << "first horizontal tube" << endl;
@@ -164,14 +164,14 @@ string decide(float x, float y) {
         return randomDecision;
     }
    */
-    
+    /*
     if (480 < x && x < 540 && 120 < y && y < 480) {
         cout << "third vertical tube" << endl;
 
         randomDecision = "down";
         return randomDecision;
     }
-    
+    */
     
     return randomDecision;
 
@@ -240,6 +240,8 @@ void grid() {
 
   
     string decision = "";
+    string previousDecision = "";
+    float speed = 10;
     while (window.isOpen()) {
         Event event;
         while (window.pollEvent(event)) {
@@ -248,8 +250,8 @@ void grid() {
             try{
 
                 
-               decision= decide(circle.getPosition().x, circle.getPosition().y);
-            
+              decision= decide(circle.getPosition().x, circle.getPosition().y, previousDecision);
+              previousDecision = decision;
 
 
 
@@ -258,7 +260,8 @@ void grid() {
                 xPosition = circle.getPosition().x + 60;
                 yPosition = circle.getPosition().y;
                 circle.setPosition(Vector2f(xPosition, yPosition));
-               // decision = decide(circle.getPosition().x, circle.getPosition().y);
+              //  circle.move(speed, 0);
+                // decision = decide(circle.getPosition().x, circle.getPosition().y);
 
     
 
@@ -270,7 +273,8 @@ void grid() {
                 xPosition = circle.getPosition().x - 60;
                 yPosition = circle.getPosition().y;
                 circle.setPosition(Vector2f(xPosition, yPosition));
-               // decision = decide(circle.getPosition().x, circle.getPosition().y);
+            //    circle.move(-speed, 0);
+                // decision = decide(circle.getPosition().x, circle.getPosition().y);
 
             }
         
@@ -280,8 +284,11 @@ void grid() {
               
                 xPosition = circle.getPosition().x;
                 yPosition = circle.getPosition().y - 60;  //reduce the vertical position to move up
+               
                 circle.setPosition(Vector2f(xPosition, yPosition));
-              //  decision = decide(circle.getPosition().x, circle.getPosition().y);
+              //  circle.move(0, -speed);
+
+                //  decision = decide(circle.getPosition().x, circle.getPosition().y);
 
             }
         
@@ -292,6 +299,8 @@ void grid() {
                 xPosition = circle.getPosition().x;
                 yPosition = circle.getPosition().y + 60; // increase the vertical position to move down
                 circle.setPosition(Vector2f(xPosition, yPosition));
+
+                // circle.move(0, speed);
               //  decision = decide(circle.getPosition().x, circle.getPosition().y);
 
 
