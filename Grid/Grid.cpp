@@ -4,6 +4,7 @@
 #include <random>
 using namespace sf;
 using namespace std;
+
 /*
 std::string getRandomDirection(std::mt19937& gen, std::uniform_int_distribution<>& distrib, int exclude) {
     int randomChoice;
@@ -57,139 +58,88 @@ int randomChoice(int lowerBound, int upperBound) {
 
     return randomNumber;
 }
-void decide(string& decision, float x, float y) {
-    decision = "";
-
+string decide(float x, float y) {
+    string randomDecision = "up";
     // intersections
     int choice = 0;
     if ((60 < x && x < 120) && (60 < y < 120)) {
-        /*choice = randomChoice(0, 1);
-        if (choice == 0)decision = "right";
-        else decision = "down";
-        */
-        decision = "right";
-        cout << "Random chose " << decision;
+
+        randomDecision = "right";
+        cout << "Random chose " << randomDecision;
         cout << "here at number 1" << endl;
-        return;
-    }
+        return randomDecision;
+    } else
     if ((60 < x && x < 120) && (240 < y < 300)) {
-        /*choice = randomChoice(0, 1);
-        if (choice == 0)decision = "up";
-        else if (choice == 1) decision = "right";
-        */
-        decision = "up";
-        cout << "Random chose " << decision;
-        cout << "here at number 2"<<endl;
-        return;
-    }
+
+        randomDecision = "up";
+        cout << "Random chose " << randomDecision;
+        cout << "here at number 2" << endl;
+        return randomDecision;
+    }else 
     if ((60 < x && x < 120) && (480 < y < 540)) {
-        choice = randomChoice(0, 1);
-        if (choice == 0)decision = "up";
-        else decision = "right";
-        cout << "Random chose " << decision;
+        randomDecision = "up";
+        cout << "Random chose " << randomDecision;
         cout << "here at number 3" << endl;
-        return;
-    }
+        return randomDecision;
+    }else
     if ((240 < x && x < 300) && (60 < y < 120)) {
-        choice = randomChoice(0, 1);
-        if (choice == 0)decision = "right";
-        else decision = "down";
-        cout << "Random chose " << decision;
+
+        randomDecision = "right";
+        cout << "Random chose " << randomDecision;
         cout << "here at number 4" << endl;
-        return;
-    }
+        return randomDecision;
+    }else
     if ((240 < x && x < 300) && (240 < y < 300)) {
         choice == randomChoice(0, 3);
-        if (choice == 0)decision = "up";
-        else if (choice == 1)decision = "right";
-        else if (choice == 2)decision = "down";
-        else decision = "left";
-        cout << "Random chose " << decision;
+        if (choice == 0)randomDecision = "up";
+        else if (choice == 1)randomDecision = "right";
+        else if (choice == 2)randomDecision = "down";
+        else randomDecision = "left";
+        cout << "Random chose " << randomDecision;
         cout << "here at number 5" << endl;
-        return;
-    }
+        return randomDecision;
+    }else 
     if ((240 < x && x < 300) && (480 < y < 540)) {
-        choice = randomChoice(0, 2);
-        if (choice == 0)decision = "up";
-        else if (choice == 1) decision = "right";
-        else decision = "left";
-        cout << "Random chose " << decision;
+        choice = randomChoice(0, 1);
+        if (choice == 0)randomDecision = "up";
+
+        else randomDecision = "left";
+        cout << "Random chose " << randomDecision;
         cout << "here at number 6" << endl;
-        return;
-    }
+        return randomDecision;
+    }else 
     if ((480 < x && x < 540) && (60 < y < 120)) {
-        /*choice = randomChoice(0, 1);
-        if (choice == 0)decision = "left";
-        else*/
 
-        decision = "down";
-        cout << "Random chose " << decision;
+        randomDecision = "down";
+        cout << "Random chose " << randomDecision;
         cout << "here at number 7" << endl;
-        return;
-    }
-    if ((480 < x && x < 540) && (240 < y < 300)) {
-        /*choice = randomChoice(0, 1);
-        if (choice == 0)decision = "up";
-        else if (choice == 1) decision = "left";
-        else*/
-        cout << "Random chose down here at number 8" << endl;
-        decision = "down";
-        return;
-    }
+        return randomDecision;
+    }else
+
     if ((480 < x && x < 540) && (480 < y < 540)) {
-        /*choice = randomChoice(0, 1);
-        if (choice == 0)decision = "up";
-        else*/
-        decision = "left";
-        cout << "Random chose " << decision;
+
+        randomDecision = "left";
+        cout << "Random chose " << randomDecision;
         cout << "here at number 9" << endl;
-        return;
-    }
-    // horizontal tubes
-    if (120 < x < 480 && 60 < y < 120) {
-        cout << "first horizontal tube" << endl;
-        decision = "right";
-        return;
-    }
-    if (120 < x < 480 && 240 < y < 300) {
-        cout << "second horizontal tube" << endl;
-        decision = "right";
-        return;
-    }
-    if (120 < x < 480 && 480 < y < 540) {
-        cout << "third horizontal tube" << endl;
-        decision = "left";
-        return;
+        return randomDecision;
     }
 
-    //vertical tubes
-    if (60 < x < 120 && 120 < y < 480) {
-        cout << "first vertical tube" << endl;
-        decision = "up";
-        return;
-    }
-    if (240 < x < 300 && 120 < y < 480) {
-        cout << "second vertical tube" << endl;
+    return randomDecision;
 
-        decision = "down";
-        return;
-    }
-    if (480 < x < 540 && 120 < y < 480) {
-        cout << "third vertical tube" << endl;
-
-        decision = "down";
-        return;
-    }
-
-    return;
 }
 
 void grid() {
 
     float screenWidth = 600;
     float screenHeight = 600;
+
+    CircleShape circle(15);
+    circle.setFillColor(Color::Green);
     float xCircle = 75;
-    float yCirlce = 90;
+    float yCirlce = 255;
+    circle.setPosition(xCircle, yCirlce);
+
+
     sf::Font font;
     if (!font.loadFromFile("Aller_It.ttf")) {
         cout << "error loading file";
@@ -198,9 +148,8 @@ void grid() {
     RenderWindow window(VideoMode(screenWidth, screenHeight), "Grid Animation");
     window.setPosition(Vector2i(0, 0));
 
-    CircleShape circle(15);
-    circle.setFillColor(Color::Green);
-    circle.setPosition(xCircle, yCirlce);
+
+  
     float xChange = 60;
 
     const int rows = 10;
@@ -240,87 +189,66 @@ void grid() {
     }
 
 
+  
     string decision = "";
-
-    bool movedRight = false;
-    bool movedUp = false;
-    bool movedLeft = false;
-    bool movedDown = false;
- 
     while (window.isOpen()) {
         Event event;
         while (window.pollEvent(event)) {
-            // decision = "up";
-            // decision = "down";
-        
-            // decision = "left";
+           
 
             try{
 
-
-            //cout << decision << endl;
-                decide(decision, circle.getPosition().x, circle.getPosition().y);
+                
+               decision= decide(circle.getPosition().x, circle.getPosition().y);
             
 
 
 
-            if (decision == "right" && !movedRight && circle.getPosition().x < 495) {
+            if (decision == "right" && circle.getPosition().x < 495) {
                 
                 xPosition = circle.getPosition().x + 60;
                 yPosition = circle.getPosition().y;
                 circle.setPosition(Vector2f(xPosition, yPosition));
-                movedRight = true;
-                decide(decision, circle.getPosition().x, circle.getPosition().y);
+              //  decision = decide(circle.getPosition().x, circle.getPosition().y);
+
+    
 
             }
-            else {
+          
 
-                movedRight = false;
-            }
-
-
-            if (decision == "left" && !movedLeft && circle.getPosition().x > 75) {
+            if (decision == "left"  && circle.getPosition().x > 75) {
              
                 xPosition = circle.getPosition().x - 60;
                 yPosition = circle.getPosition().y;
                 circle.setPosition(Vector2f(xPosition, yPosition));
-                movedLeft = true;
-                decide(decision, circle.getPosition().x, circle.getPosition().y);
+                //decision = decide(circle.getPosition().x, circle.getPosition().y);
+
             }
-            else {
-                // Reset the flag when the key is released
-                movedLeft = false;
-            }
+        
 
 
-            if (decision == "up" && !movedUp && circle.getPosition().y > 75) {
+            if (decision == "up" && circle.getPosition().y > 75) {
               
                 xPosition = circle.getPosition().x;
                 yPosition = circle.getPosition().y - 60;  //reduce the vertical position to move up
                 circle.setPosition(Vector2f(xPosition, yPosition));
-                movedUp = true;
-                decide(decision, circle.getPosition().x, circle.getPosition().y);
+               // decision = decide(circle.getPosition().x, circle.getPosition().y);
+
             }
-            else {
-                // Reset the flag when the key is released
-                movedUp = false;
-            }
+        
 
 
-            if (decision == "down" && !movedDown && circle.getPosition().y < 495) {
+            if (decision == "down" && circle.getPosition().y < 495) {
           
                 xPosition = circle.getPosition().x;
                 yPosition = circle.getPosition().y + 60; // increase the vertical position to move down
                 circle.setPosition(Vector2f(xPosition, yPosition));
-                movedDown = true;
-                decide(decision, circle.getPosition().x, circle.getPosition().y);
+               // decision = decide(circle.getPosition().x, circle.getPosition().y);
+
 
             }
 
-            else {
-                // Reset the flag when the key is released
-                movedDown = false;
-            }
+          
 
         }
             catch (exception& e) {
