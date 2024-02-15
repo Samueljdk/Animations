@@ -64,18 +64,21 @@ string decide(float x, float y, string previousDecision) {
     int choice = 0;
     if (x==75 && y==75) {
         choice = randomChoice(0, 1);
-        if (choice == 0) { randomDecision = "right"; }
-        else if (choice==1) { randomDecision = "down"; }
+        if (choice == 0 && previousDecision!="left") { randomDecision = "right"; }
+        else if (choice==1 && previousDecision!="up") { randomDecision = "down"; }
+        
+       // randomDecision = "right";
+            
         cout << "Random chose " << randomDecision;
         cout << "here at number 1" << endl;
         return randomDecision;
     }
 
     if (x==75 && y==255) {
-        choice = randomChoice(0, 2);
+        choice = randomChoice(0, 1);
         if (choice == 0)randomDecision = "right";
-        else if (choice == 1)randomDecision = "down";
-        else randomDecision = "up";
+        else if (choice == 1)randomDecision = "up";
+       
         cout << "Random chose " << randomDecision;
         cout << "here at number 2" << endl;
         return randomDecision;
@@ -83,9 +86,10 @@ string decide(float x, float y, string previousDecision) {
 
     if (x==75 && y==495) {
         choice = randomChoice(0, 1);
-        if (choice == 0)randomDecision = "right";
-        else if (choice == 1)randomDecision = "up";
-        
+        if (choice == 0 && previousDecision != "left") { randomDecision = "right"; }
+        else if (choice == 1 && previousDecision != "down") { randomDecision = "up"; }
+
+        //randomDecision = "up";
         cout << "Random chose " << randomDecision;
         cout << "here at number 3" << endl;
         return randomDecision;
@@ -93,9 +97,10 @@ string decide(float x, float y, string previousDecision) {
 
     if (x==255 && y==75) {
         choice = randomChoice(0, 2);
-        if (choice == 0) { randomDecision = "right"; }
-        else if (choice == 1) { randomDecision = "down"; }
-        else { randomDecision = "left"; }
+        if (choice == 0 && previousDecision!="left") { randomDecision = "right"; }
+        else if(choice == 2 && previousDecision != "right") { randomDecision = "left"; }
+        else if (choice == 1 && previousDecision!="up") { randomDecision = "down"; }
+        
         cout << "Random chose " << randomDecision;
         cout << "here at number 4" << endl;
         return randomDecision;
@@ -114,9 +119,9 @@ string decide(float x, float y, string previousDecision) {
     
     if (x==255 && y==495) {
             choice = randomChoice(0, 2);
-            if (choice == 0)randomDecision = "up";
-            else if (choice == 1) randomDecision = "left";
-            else randomDecision = "right";
+            if (choice == 0 && previousDecision != "down")randomDecision = "up";
+            else if (choice == 1 && previousDecision != "right") randomDecision = "left";
+            else if(choice==2 && previousDecision!="left")randomDecision = "right";
 
             cout << "Random chose " << randomDecision;
             cout << "here at number 6" << endl;
@@ -125,9 +130,10 @@ string decide(float x, float y, string previousDecision) {
         
     if (x==495 && y==75) {
         choice = randomChoice(0, 1);
-        if (choice == 0)randomDecision = "down";
-        else randomDecision = "left";
-       
+        if (choice == 0 && previousDecision != "right") { randomDecision = "left"; }
+        else if (choice == 1 && previousDecision != "up") { randomDecision = "down"; }
+
+      //  randomDecision = "down";
                 cout << "Random chose " << randomDecision;
                 cout << "here at number 7" << endl;
                 return randomDecision;
@@ -135,9 +141,9 @@ string decide(float x, float y, string previousDecision) {
             
     if (x == 495 && y == 255) {
         choice = randomChoice(0, 2);
-        if (choice == 0)randomDecision = "down";
-        else if (choice == 1) randomDecision = "left";
-        else randomDecision = "up";
+        if (choice == 0 && previousDecision!="up")randomDecision = "down";
+        else if (choice == 1 && previousDecision != "right") randomDecision = "left";
+        else if(choice==2 && previousDecision!="down") randomDecision = "up";
 
         cout << "Random chose " << randomDecision;
         cout << "here at number 6" << endl;
@@ -146,9 +152,10 @@ string decide(float x, float y, string previousDecision) {
    
    if (x==495 && y==495) {
        choice = randomChoice(0, 1);
-       if (choice == 0)randomDecision = "left";
-       else randomDecision = "up";
+       if (choice == 0 && previousDecision != "right") { randomDecision = "left"; }
+       else if (choice == 1 && previousDecision != "down") { randomDecision = "up"; }
 
+       //randomDecision = "left";
                     cout << "Random chose " << randomDecision;
                     cout << "here at number 9" << endl;
                     return randomDecision;
