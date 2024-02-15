@@ -51,50 +51,54 @@ std::string decide(float x, float y) {
 }
 */
 int randomChoice(int lowerBound, int upperBound) {
-    srand(time(0)); // uses the current time to generate a random number
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> distrib(lowerBound, upperBound);
 
-    // Generate a random number within the specified range
-    int randomNumber = std::rand() % (upperBound - lowerBound + 1) + lowerBound;
-
-    cout << "random called \n";
+    int randomNumber =distrib(gen);
     return randomNumber;
 }
 string decide(float x, float y, string previousDecision) {
     string randomDecision = previousDecision;
     // intersections
     int choice = 0;
-    if ((60 < x && x < 120) && (60 < y && y < 120)) {
-
-        randomDecision = "right";
+    if (x==75 && y==75) {
+        choice = randomChoice(0, 1);
+        if (choice == 0) { randomDecision = "right"; }
+        else if (choice==1) { randomDecision = "down"; }
         cout << "Random chose " << randomDecision;
         cout << "here at number 1" << endl;
         return randomDecision;
     }
 
-    if ((60 < x && x < 120) && (240 < y && y < 300)) {
-
-        randomDecision = "up";
+    if (x==75 && y==255) {
+        choice = randomChoice(0, 2);
+        if (choice == 0)randomDecision = "right";
+        else if (choice == 1)randomDecision = "down";
+        else randomDecision = "up";
         cout << "Random chose " << randomDecision;
         cout << "here at number 2" << endl;
         return randomDecision;
     }
 
-    if ((60 < x && x < 120) && (480 < y && y < 540)) {
+    if (x==75 && y==495) {
         randomDecision = "up";
         cout << "Random chose " << randomDecision;
         cout << "here at number 3" << endl;
         return randomDecision;
     }
 
-    if ((240 < x && x < 300) && (60 < y && y < 120)) {
-
-        randomDecision = "right";
+    if (x==255 && y==75) {
+        choice = randomChoice(0, 2);
+        if (choice == 0) { randomDecision = "right"; }
+        else if (choice == 1) { randomDecision = "down"; }
+        else { randomDecision = "left"; }
         cout << "Random chose " << randomDecision;
         cout << "here at number 4" << endl;
         return randomDecision;
     }
 
-    if ((240 < x && x < 300) && (240 < y && y < 300)) {
+    if (x==255 && y==255) {
         choice == randomChoice(0, 3);
         if (choice == 0)randomDecision = "up";
         else if (choice == 1)randomDecision = "right";
@@ -105,7 +109,7 @@ string decide(float x, float y, string previousDecision) {
         return randomDecision;
     }
     
-    if ((240 < x && x < 300) && (480 < y && y < 540)) {
+    if (x==255 && y==495) {
             choice = randomChoice(0, 1);
             if (choice == 0)randomDecision = "up";
             else randomDecision = "left";
@@ -115,7 +119,7 @@ string decide(float x, float y, string previousDecision) {
             return randomDecision;
         }
         
-    if ((480 < x && x < 540) && (60 < y && y < 120)) {
+    if (x==495 && y==75) {
 
                 randomDecision = "down";
                 cout << "Random chose " << randomDecision;
@@ -123,7 +127,17 @@ string decide(float x, float y, string previousDecision) {
                 return randomDecision;
             }
             
-     if ((480 < x && x < 540) && (480 < y && y < 540)) {
+    if (x == 495 && y == 255) {
+        choice = randomChoice(0, 1);
+        if (choice == 0)randomDecision = "down";
+        else randomDecision = "left";
+
+        cout << "Random chose " << randomDecision;
+        cout << "here at number 6" << endl;
+        return randomDecision;
+    }
+   
+   if (x==495 && y==495) {
 
                     randomDecision = "left";
                     cout << "Random chose " << randomDecision;
@@ -163,8 +177,8 @@ void grid() {
 
 
 
-    float xChange = 1;
-    float yChange = 1;
+    float xChange = 0.5;
+    float yChange = 0.5;
     const int rows = 10;
     const int columns = 10;
     float xPosition = 0;
