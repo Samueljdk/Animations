@@ -82,7 +82,10 @@ string decide(float x, float y, string previousDecision) {
     }
 
     if (x==75 && y==495) {
-        randomDecision = "up";
+        choice = randomChoice(0, 1);
+        if (choice == 0)randomDecision = "right";
+        else if (choice == 1)randomDecision = "up";
+        
         cout << "Random chose " << randomDecision;
         cout << "here at number 3" << endl;
         return randomDecision;
@@ -110,9 +113,10 @@ string decide(float x, float y, string previousDecision) {
     }
     
     if (x==255 && y==495) {
-            choice = randomChoice(0, 1);
+            choice = randomChoice(0, 2);
             if (choice == 0)randomDecision = "up";
-            else randomDecision = "left";
+            else if (choice == 1) randomDecision = "left";
+            else randomDecision = "right";
 
             cout << "Random chose " << randomDecision;
             cout << "here at number 6" << endl;
@@ -120,17 +124,20 @@ string decide(float x, float y, string previousDecision) {
         }
         
     if (x==495 && y==75) {
-
-                randomDecision = "down";
+        choice = randomChoice(0, 1);
+        if (choice == 0)randomDecision = "down";
+        else randomDecision = "left";
+       
                 cout << "Random chose " << randomDecision;
                 cout << "here at number 7" << endl;
                 return randomDecision;
             }
             
     if (x == 495 && y == 255) {
-        choice = randomChoice(0, 1);
+        choice = randomChoice(0, 2);
         if (choice == 0)randomDecision = "down";
-        else randomDecision = "left";
+        else if (choice == 1) randomDecision = "left";
+        else randomDecision = "up";
 
         cout << "Random chose " << randomDecision;
         cout << "here at number 6" << endl;
@@ -138,8 +145,10 @@ string decide(float x, float y, string previousDecision) {
     }
    
    if (x==495 && y==495) {
+       choice = randomChoice(0, 1);
+       if (choice == 0)randomDecision = "left";
+       else randomDecision = "up";
 
-                    randomDecision = "left";
                     cout << "Random chose " << randomDecision;
                     cout << "here at number 9" << endl;
                     return randomDecision;
