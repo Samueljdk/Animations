@@ -6,30 +6,40 @@ using namespace sf;
 using namespace std;
 
 void grid() {
-    float screenWidth = 600;
+    float screenWidth = 1000;
     float screenHeight = 600;
-    RenderWindow window(VideoMode(screenWidth, screenHeight), "Circle Pyramid");
+    RenderWindow window(VideoMode(screenWidth, screenHeight), "Grid Animation");
     window.setPosition(Vector2i(0, 0));
 
-    const int height=10;
+    const int columns = 6;
+    const int rows = 10;
     float xPosition = 0;
     float yPosition = 0;
-    CircleShape circles[height][height];
+    float x,y;
+    RectangleShape squares[rows][columns];
+    CircleShape circles[rows][columns];
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < columns; j++) {
+            squares[i][j].setFillColor(Color::Transparent);
+            squares[i][j].setSize(Vector2f(100, 100));
+            squares[i][j].setOutlineColor(Color::White);
+            squares[i][j].setOutlineThickness(1);
+            squares[i][j].setPosition(Vector2f(xPosition, yPosition));
+            xPosition += 100;
 
-    for (int i = 0; i < height; i++) {
-        for (int j = 0; j < height -i; j++) {
-            circles[i][j].setFillColor(Color::Transparent);
-            circles[i][j].setRadius(30);
-
+            circles[i][j].setPosition(i*100, j*100);
+           
+            cout << "(" << i * 100 << "," << j * 100 << ")" << endl;
+               circles[i][j].setRadius(50);
+               circles[i][j].setOutlineThickness(1);
             circles[i][j].setOutlineColor(Color::White);
-            circles[i][j].setOutlineThickness(4);
-            circles[i][j].setPosition(Vector2f(xPosition, yPosition));
-            xPosition += 60;
+            circles[i][j].setFillColor(Color::Green);
+       
         }
         xPosition = 0; // Reset xPosition for the next row
-        yPosition += 60;
+        yPosition += 100;
     }
-
+   
     while (window.isOpen()) {
         Event event;
         while (window.pollEvent(event)) {
@@ -40,12 +50,15 @@ void grid() {
 
         window.clear();
 
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < height; j++) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                window.draw(squares[i][j]);
                 window.draw(circles[i][j]);
+
             }
         }
 
+        
         window.display();
     }
 }
