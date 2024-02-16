@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Grid", "Grid\Grid.vcxproj",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Circle Pyramid", "Circle Pyramid\Circle Pyramid.vcxproj", "{17A42669-0125-4936-8C79-3D0AB87DBFFC}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Resizable Rectangle", "Resizable Rectangle\Resizable Rectangle.vcxproj", "{AFA29651-1154-4E67-9A7F-8C0B76C8DA5E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{17A42669-0125-4936-8C79-3D0AB87DBFFC}.Release|x64.Build.0 = Release|x64
 		{17A42669-0125-4936-8C79-3D0AB87DBFFC}.Release|x86.ActiveCfg = Release|Win32
 		{17A42669-0125-4936-8C79-3D0AB87DBFFC}.Release|x86.Build.0 = Release|Win32
+		{AFA29651-1154-4E67-9A7F-8C0B76C8DA5E}.Debug|x64.ActiveCfg = Debug|x64
+		{AFA29651-1154-4E67-9A7F-8C0B76C8DA5E}.Debug|x64.Build.0 = Debug|x64
+		{AFA29651-1154-4E67-9A7F-8C0B76C8DA5E}.Debug|x86.ActiveCfg = Debug|Win32
+		{AFA29651-1154-4E67-9A7F-8C0B76C8DA5E}.Debug|x86.Build.0 = Debug|Win32
+		{AFA29651-1154-4E67-9A7F-8C0B76C8DA5E}.Release|x64.ActiveCfg = Release|x64
+		{AFA29651-1154-4E67-9A7F-8C0B76C8DA5E}.Release|x64.Build.0 = Release|x64
+		{AFA29651-1154-4E67-9A7F-8C0B76C8DA5E}.Release|x86.ActiveCfg = Release|Win32
+		{AFA29651-1154-4E67-9A7F-8C0B76C8DA5E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,7 +5,9 @@
 using namespace sf;
 using namespace std;
 
-void grid() {
+
+
+void CirclePyramid() {
     float screenWidth = 900;
     float screenHeight = 500;
     RenderWindow window(VideoMode(screenWidth, screenHeight), "Grid Animation");
@@ -94,7 +96,8 @@ void grid() {
     }
 }
 
+
 int main() {
-    grid();
+    CirclePyramid();
     return 0;
 }
