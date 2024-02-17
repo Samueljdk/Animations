@@ -1,58 +1,14 @@
-#include <SFML/Graphics.hpp>
+#include <SFML/Graphics.hpp> // sfml library
 #include <iostream>
-#include <cstdlib>
-#include <random>
+#include <random> // library to create the random choices
 using namespace sf;
 using namespace std;
 
-/*
-std::string getRandomDirection(std::mt19937& gen, std::uniform_int_distribution<>& distrib, int exclude) {
-    int randomChoice;
-    do {
-        randomChoice = distrib(gen);
-    } while (randomChoice == exclude);
-
-    if (randomChoice == 0) return "up";
-    else if (randomChoice == 1) return "right";
-    else if (randomChoice == 2) return "down";
-    else return "left";
-}
-
-std::string decide(float x, float y) {
-    x = round(x);
-    y = round(y);
-
-    std::random_device rd;
-    std::mt19937 gen(rd());
-
-    // Common random distribution for 0 to N-1 choices
-    std::uniform_int_distribution<> distrib(0, 3);
-
-    // U, R, D, L
-    // 255, 75 down only 1
-    if (x == 255 && y == 75) return "down";
-    // 495, 75 down only 1
-    else if (x == 495 && y == 75) return "down";
-    // 75, 75 right or down, exclude right and left
-    else if (x == 75 && y == 75) return getRandomDirection(gen, distrib, 1);
-    // 75, 495 up or right 2, exclude left and down
-    else if (x == 75 && y == 495) return getRandomDirection(gen, distrib, 2);
-    // 495, 495 up or left 2, exclude right and down
-    else if (x == 495 && y == 495) return getRandomDirection(gen, distrib, 1);
-    // 75, 255 up, down, right 3, exclude left
-    else if (x == 75 && y == 255) return getRandomDirection(gen, distrib, 3);
-    // 495, 255 left, up or down 3, exclude right
-    else if (x == 495 && y == 255) return getRandomDirection(gen, distrib, 1);
-    // 255, 495 up, left, right 3, exclude down
-    else if (x == 255 && y == 495) return getRandomDirection(gen, distrib, 2);
-    // 255, 255 all directions 4
-    else if (x == 255 && y == 495) return getRandomDirection(gen, distrib, 3);
-    else return "right";
-}
-*/
+static random_device rd;
+static mt19937 gen(rd());
 int randomChoice(int lowerBound, int upperBound) {
-    random_device rd;
-    mt19937 gen(rd());
+    
+    
     uniform_int_distribution<> distrib(lowerBound, upperBound);
 
     int randomNumber =distrib(gen);
@@ -75,10 +31,10 @@ string decide(float x, float y, string previousDecision) {
     }
 
     if (x==75 && y==255) {
-        choice = randomChoice(0, 1);
-        if (choice == 0)randomDecision = "right";
-        else if (choice == 1)randomDecision = "up";
-       
+        choice = randomChoice(0, 2);
+        if (choice == 0 && previousDecision != "left")randomDecision = "right";
+        else if (choice == 1 && previousDecision != "down")randomDecision = "up";
+        else if (choice == 2 && previousDecision != "up")randomDecision = "down";
         cout << "Random chose " << randomDecision;
         cout << "here at number 2" << endl;
         return randomDecision;
@@ -108,9 +64,9 @@ string decide(float x, float y, string previousDecision) {
 
     if (x==255 && y==255) {
         choice == randomChoice(0, 3);
-        if (choice == 0)randomDecision = "up";
-        else if (choice == 1)randomDecision = "right";
-        else if (choice == 2)randomDecision = "down";
+        if (choice == 0 && previousDecision != "down")randomDecision = "up";
+        else if (choice == 1 && previousDecision != "left")randomDecision = "right";
+        else if (choice == 2 && previousDecision != "up")randomDecision = "down";
         else randomDecision = "left";
         cout << "Random chose " << randomDecision;
         cout << "here at number 5" << endl;
