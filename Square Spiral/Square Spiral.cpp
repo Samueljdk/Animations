@@ -7,7 +7,7 @@ void squaresSpiral() {
 	//setting the window dimensions and title
 	const float windowWidth = 800;
 	const float windowHeight = 800;
-	RenderWindow window(VideoMode(windowWidth, windowHeight), "squares Spiral Animation");
+	RenderWindow window(VideoMode(windowWidth, windowHeight), "Squares Spiral Animation");
 	window.setPosition(Vector2i(0, 0)); // placing the window at the top left corner of the screen
 	
 	//setting the number of squares
