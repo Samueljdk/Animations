@@ -35,6 +35,7 @@ void squaresSpiral() {
 			yPosition[i - 1] = yPosition[i - 2] - 50;
 			sidelength[i - 1] = sidelength[i-2]+100;
 
+
 		}
 		squares[i-1].setSize(Vector2f(sidelength[i-1], sidelength[i-1]));
 		squares[i-1].setPosition(Vector2f(xPosition[i-1], yPosition[i-1]));
