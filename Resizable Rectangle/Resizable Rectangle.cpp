@@ -1,55 +1,67 @@
-#include <SFML/Graphics.hpp> // sfml is a graphics libraary for 
+#include <SFML/Graphics.hpp> // SFML is a graphics library for 
 #include <iostream>
-#include <cstdlib> // allows me to access the system cmd functions such as clear 
+#include <cstdlib> // Allows access to system cmd functions such as clear 
 using namespace sf;
 using namespace std;
 
 void ResizableRectangle() {
-	float screenWidth = 1000;
-	float screenHeight = 600;
-	float rectangleWidth = 50;
-	float rectangleHeight = 50;
-	
-	RenderWindow window(VideoMode(screenWidth, screenHeight), "Resizable Rectangle");
-	window.setPosition(Vector2i(0, 0)); //
-	
-	RectangleShape rectangle;
-	rectangle.setFillColor(Color::Green);
-	rectangle.setOutlineColor(Color::White);
-	rectangle.setOutlineThickness(5);
+    // Setting the window dimensions
+    const float windowWidth = 1000;
+    const float windowHeight = 600;
 
-	while (window.isOpen()) {
-		rectangle.setSize(Vector2f(rectangleWidth, rectangleHeight));
-		
-		Event event;
+    // Setting the rectangle's initial dimensions
+    float rectangleWidth = 50;
+    float rectangleHeight = 50;
 
-		if (Keyboard::isKeyPressed(Keyboard::W)) {
-		
-			if(rectangleWidth < screenWidth-10)rectangleWidth+=0.1;
-			if (rectangleHeight < screenHeight-10)rectangleHeight+=0.1;
-	
-		}
-		
-		if (Keyboard::isKeyPressed(Keyboard::N)) {
-			if (rectangleWidth > 50)rectangleWidth-=0.1;
-			if (rectangleHeight > 50)rectangleHeight-=0.1;
+    // Setting the window dimensions and title
+    RenderWindow window(VideoMode(windowWidth, windowHeight), "Resizable Rectangle");
+    window.setPosition(Vector2i(0, 0)); // Making the window show up on the top left corner
 
-		}
+    // Defining the rectangle's characteristics
+    RectangleShape rectangle;
+    rectangle.setFillColor(Color::Green);
+    rectangle.setOutlineColor(Color::White);
+    rectangle.setOutlineThickness(5);
 
-		while (window.pollEvent(event)) { // keeps checking to see if the user closed the windo
-			if (event.type == Event::Closed) {
-				window.close(); // closes the window
-			}
-		}
-		
-		window.clear();
-		window.draw(rectangle);
-		window.display();
-	}
+    while (window.isOpen()) { // Continuously checking to see if the window is open
+        // Setting the size of the rectangle every iteration to capture the changes in size
+        rectangle.setSize(Vector2f(rectangleWidth, rectangleHeight));
 
+        Event event;
+
+        if (Keyboard::isKeyPressed(Keyboard::W)) {
+            /* If the W key is pressed and the rectangle is not less than 10 pixels away from the border,
+               the width increases by 0.1 */
+            if (rectangleWidth < windowWidth - 10) rectangleWidth += 0.1;
+
+            /* If the W key is pressed and the rectangle is not less than 10 pixels away from the bottom of the window,
+               the length increases by 0.1 */
+            if (rectangleHeight < windowHeight - 10) rectangleHeight += 0.1;
+        }
+
+        if (Keyboard::isKeyPressed(Keyboard::N)) {
+            /* If the N key is pressed and the rectangle is still bigger than its initial width,
+               the width decreases by 0.1 */
+            if (rectangleWidth > 50) rectangleWidth -= 0.1;
+
+            /* If the N key is pressed and the rectangle is still bigger than its initial height,
+               the height decreases by 0.1 */
+            if (rectangleHeight > 50) rectangleHeight -= 0.1;
+        }
+
+        while (window.pollEvent(event)) { // Keeps checking to see if the user closed the window
+            if (event.type == Event::Closed) {
+                window.close(); // Closes the window
+            }
+        }
+
+        window.clear();
+        window.draw(rectangle);
+        window.display();
+    }
 }
 
 int main() {
-	ResizableRectangle();
-	return 0;
+    ResizableRectangle();
+    return 0;
 }
