@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp> // SFML is a graphics library for 
 #include <iostream>
-#include <cstdlib> // Allows access to system cmd functions such as clear 
+
 using namespace sf;
 using namespace std;
 
