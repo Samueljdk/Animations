@@ -1,12 +1,13 @@
 #include <SFML/Graphics.hpp> // sfml is a graphics libraary for drawing the shapes
 #include <iostream>
 using namespace sf;
-using namespace std;
+using namespace std; // used for the Cout and Cin, used in place of writing st:: for each cout/in line  
 
 void bouncingBall() {
     // loading a ttf file to determine the font for the text
     Font font;
-    if (!font.loadFromFile("Aller_It.ttf")) {
+    if (!font.loadFromFile("Aller_It.ttf")) //ttf is a font style
+    {
         cout << "error loading file"; // message for me if loading fails
     }
 
@@ -33,9 +34,8 @@ void bouncingBall() {
     CircleShape circle(50); // radius of 50
 
 
-
-
-    while (window.isOpen()) { // constantly checking to see if the window is open
+    while (window.isOpen()) // constantly checking to see if the window is open
+    { 
 
         //diagonal move to the bottom from the top left corner
         //xPosition must be less than 250 to ensure the ball hits the middle of the bottom edge
@@ -53,7 +53,8 @@ void bouncingBall() {
 
         }
         // diagonal move to the right
-        if (reachedBottom && !reachedRight) {
+        if (reachedBottom && !reachedRight) 
+        {
             xPosition += 0.1; //xPosition increments after hitting bottom but before hitting the right edge
             yPosition -= 0.1; //yPosition decrements so that the ball can move up
 
@@ -64,7 +65,8 @@ void bouncingBall() {
 
         // moving diagonally to the left
         // if the ball has hit bottom and right, but not top yet
-        if (reachedBottom && reachedRight && !reachedTop) {
+        if (reachedBottom && reachedRight && !reachedTop) 
+        {
             xPosition -= 0.1; // we decrement the xPosition to make it go left
             yPosition -= 0.1;  // we decrement the yPosition to make it go up
             if (yPosition <= 0)reachedTop = true; // when the ball is close to hit the upper edge, we turn the flag to true
@@ -80,7 +82,8 @@ void bouncingBall() {
 
         // once all edges have been hit, we start to make the ball go down again
                 // it follows the same path
-        if (reachedBottom && reachedLeft && reachedRight && reachedTop) {
+        if (reachedBottom && reachedLeft && reachedRight && reachedTop) 
+        {
 
             xPosition += 0.1; //
             yPosition += 0.1;
@@ -89,7 +92,8 @@ void bouncingBall() {
             go down again, we turn the flags false
             thus starting the cycle again
             */
-            if (xPosition > 250 || yPosition >= 500) {
+            if (xPosition > 250 || yPosition >= 500) 
+            {
                 reachedBottom = false;
                 reachedLeft = false;
                 reachedTop = false;
@@ -120,8 +124,10 @@ void bouncingBall() {
         text.setString(message);
 
         Event event;
-        while (window.pollEvent(event)) { // keeps checking to see if the user closed the windo
-            if (event.type == Event::Closed) {
+        while (window.pollEvent(event)) 
+        { // keeps checking to see if the user closed the windo
+            if (event.type == Event::Closed) 
+            {
                 window.close(); // closes the window
             }
         }
@@ -137,7 +143,8 @@ void bouncingBall() {
 
 }
 
-int main() {
+int main() 
+{
     bouncingBall();
 
     return 0;
